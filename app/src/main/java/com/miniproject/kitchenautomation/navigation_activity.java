@@ -1,33 +1,24 @@
 package com.miniproject.kitchenautomation;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
-import android.support.v4.view.GravityCompat;
-import android.support.v7.app.ActionBarDrawerToggle;
+import androidx.core.view.GravityCompat;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
-import android.support.design.widget.NavigationView;
-import android.support.v4.widget.DrawerLayout;
+import com.google.android.material.navigation.NavigationView;
+import androidx.drawerlayout.widget.DrawerLayout;
 
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Status;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -146,6 +137,22 @@ public class navigation_activity extends AppCompatActivity
             overridePendingTransition(0,0);
             finish();
 
+        }
+        else if(id == R.id.seemap){
+//            double latitude = 40.714728;
+//            double longitude = -73.998672;
+//            String label = "I'm Here!";
+//            String uriBegin = "geo:" + latitude + "," + longitude;
+//            String query = latitude + "," + longitude + "(" + label + ")";
+//            String encodedQuery = Uri.encode(query);
+//            String uriString = uriBegin + "?q=" + encodedQuery + "&z=16";
+//            Uri uri = Uri.parse(uriString);
+//            Intent mapIntent = new Intent(android.content.Intent.ACTION_VIEW, uri);
+//            startActivity(mapIntent);
+            Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            startActivityForResult(intent, 0);
+            overridePendingTransition(0,0);
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

@@ -1,12 +1,13 @@
 package com.miniproject.kitchenautomation;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +15,11 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -38,7 +41,7 @@ public class ProfileActivity extends navigation_activity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        if(savedInstanceState == null){
+        if(FirebaseApp.getApps(this).size() == 0){
             FirebaseDatabase.getInstance().setPersistenceEnabled(true);
             }
         ViewGroup content = (ViewGroup) findViewById(R.id.display);
@@ -59,7 +62,9 @@ public class ProfileActivity extends navigation_activity {
         rootRef = FirebaseDatabase.getInstance().getReference();
         FirebaseUser user = mAuth.getCurrentUser();
         demoRef = rootRef.child(user.getUid());
+
         DatabaseReference table_user = FirebaseDatabase.getInstance().getReference(user.getUid());
+        table_user.keepSynced(true);
         if(user != null){
             Glide.with(this)
                     .load(user.getPhotoUrl())
@@ -96,9 +101,18 @@ public class ProfileActivity extends navigation_activity {
 
         submit.setOnClickListener(new View.OnClickListener() {
 
-            @Override
+            private boolean isNetworkAvailable() {
+                ConnectivityManager connectivityManager
+                        = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+                return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+            }
 
+            @Override
             public void onClick(View v) {
+                if (isNetworkAvailable() == false){
+                    Toast.makeText(ProfileActivity.this,"Connect to Internet",Toast.LENGTH_SHORT).show();
+                }
                 String emergency1 = emergency_no1.getText().toString();
                 String emergency2 = emergency_no2.getText().toString();
                 String mobile_no = mobile.getText().toString();

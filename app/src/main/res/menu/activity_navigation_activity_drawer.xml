@@ -22,6 +22,11 @@
             android:title="Profile" />
 
         <item
+            android:id="@+id/seemap"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Maps" />
+
+        <item
             android:id="@+id/signout"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="LogOut" />
