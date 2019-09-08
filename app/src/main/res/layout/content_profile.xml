@@ -36,6 +36,7 @@
 
             <EditText
                 android:id="@+id/emergency_no"
+                android:inputType="number"
                 style="@style/profileDetailsMiniText"
                 android:layout_alignParentTop="true"
                 android:layout_marginLeft="10dp"
@@ -61,6 +62,7 @@
 
             <EditText
                 android:id="@+id/emergency_no1"
+                android:inputType="number"
                 style="@style/profileDetailsMiniText"
                 android:layout_alignParentTop="true"
                 android:layout_marginLeft="10dp"
@@ -79,12 +81,13 @@
                 style="@style/profileDetailsImage" />
 
             <TextView
-                android:text="Mobile"
+                android:text="Personal Mobile No."
                 android:layout_toRightOf="@id/mobileImageView"
                 style="@style/profileDetailsTextMain"/>
 
             <EditText
                 android:id="@+id/mobile_no"
+                android:inputType="number"
                 android:hint="9930864002"
                 android:layout_marginTop="10dp"
                 android:layout_toRightOf="@id/mobileImageView"
@@ -100,13 +103,14 @@
                 style="@style/profileDetailsImage" />
 
             <TextView
-                android:text="Email"
+                android:text="LPG Service Center No."
                 android:layout_toRightOf="@id/emailImageView"
                 style="@style/profileDetailsTextMain" />
 
             <EditText
-                android:id="@+id/email"
-                android:hint="akhil98.nair@gmail.com"
+                android:id="@+id/lpg_no"
+                android:inputType="number"
+                android:hint="9635687431"
                 android:layout_marginTop="10dp"
                 android:layout_toRightOf="@id/emailImageView"
                 style="@style/profileDetailsMiniText" />

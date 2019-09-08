@@ -15,6 +15,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -29,36 +31,57 @@ import java.util.Locale;
 
 public class ProfileActivity extends navigation_activity {
     ImageView user_image;
-    EditText name, mobile, email, address;
-    TextView submit, edittext;
+    EditText mobile, address, emergency_no1, emergency_no2, lpg_service_no;
+    TextView name, submit, email, edittext;
     DatabaseReference rootRef,demoRef;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+        if(savedInstanceState == null){
+            FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+            }
         ViewGroup content = (ViewGroup) findViewById(R.id.display);
         getLayoutInflater().inflate(R.layout.activity_profile, content, true);
         final Calendar myCalendar = Calendar.getInstance();
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
+        user_image = (ImageView)findViewById(R.id.user_image);
       edittext= (TextView) findViewById(R.id.Birthday);
-       name = (EditText)findViewById(R.id.name);
+      lpg_service_no = (EditText)findViewById(R.id.lpg_no);
+       name = (TextView) findViewById(R.id.user_name);
          mobile = (EditText)findViewById(R.id.mobile_no);
-         email = (EditText)findViewById(R.id.email);
+         email = (TextView) findViewById(R.id.email_id);
+         emergency_no1 = (EditText)findViewById(R.id.emergency_no);
+         emergency_no2 = (EditText)findViewById(R.id.emergency_no1);
          address = (EditText)findViewById(R.id.address);
          submit = (TextView)findViewById(R.id.submit);
-        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
         rootRef = FirebaseDatabase.getInstance().getReference();
         FirebaseUser user = mAuth.getCurrentUser();
         demoRef = rootRef.child(user.getUid());
         DatabaseReference table_user = FirebaseDatabase.getInstance().getReference(user.getUid());
+        if(user != null){
+            Glide.with(this)
+                    .load(user.getPhotoUrl())
+                    .apply(RequestOptions.circleCropTransform())
+                    .apply(new RequestOptions().override(600, 200))
+                    .into(user_image);
+
+//
+            Log.d("myTag", user.getDisplayName().toString());
+            name.setText(user.getDisplayName().toString());
+            email.setText(user.getEmail().toString());
+        }
         table_user.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot ds : dataSnapshot.getChildren()){
 
-                    name.setText(ds.child("name").getValue(String.class));
+                    emergency_no1.setText(ds.child("emergency_no1").getValue(String.class));
+                    emergency_no2.setText(ds.child("emergency_no2").getValue(String.class));
 //                    Log.d("myTag", ds.child("name").getValue(String.class) );
                     mobile.setText(ds.child("mobile").getValue(String.class));
-                    email.setText(ds.child("email").getValue(String.class));
+                    lpg_service_no.setText(ds.child("lpg_service_no").getValue(String.class));
                     address.setText(ds.child("address").getValue(String.class));
                     edittext.setText(ds.child("DOB").getValue(String.class));
 
@@ -76,17 +99,19 @@ public class ProfileActivity extends navigation_activity {
             @Override
 
             public void onClick(View v) {
-                String user_name = name.getText().toString();
+                String emergency1 = emergency_no1.getText().toString();
+                String emergency2 = emergency_no2.getText().toString();
                 String mobile_no = mobile.getText().toString();
-                String email_id = email.getText().toString();
+                String lpg_service = lpg_service_no.getText().toString();
                 String full_address = address.getText().toString();
                 String dob = edittext.getText().toString();
 
 
 //push creates a unique id in database
- demoRef.child("Profile").child("name").setValue(user_name);
+ demoRef.child("Profile").child("emergency_no1").setValue(emergency1);
+                demoRef.child("Profile").child("emergency_no2").setValue(emergency2);
                 demoRef.child("Profile").child("mobile").setValue(mobile_no);
-                demoRef.child("Profile").child("email").setValue(email_id);
+                demoRef.child("Profile").child("lpg_service_no").setValue(lpg_service);
                 demoRef.child("Profile").child("address").setValue(full_address);
                 demoRef.child("Profile").child("DOB").setValue(dob);
 
