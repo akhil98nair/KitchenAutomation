@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "336268949436",
+    "firebase_url": "https://kitchenautomation-aa6bb.firebaseio.com",
+    "project_id": "kitchenautomation-aa6bb",
+    "storage_bucket": "kitchenautomation-aa6bb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:336268949436:android:824684e44cdf4f66f91db9",
+        "android_client_info": {
+          "package_name": "com.miniproject.kitchenautomation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "336268949436-sc57u7bgl6jh48u0a3tgdlit9o10tp2i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.miniproject.kitchenautomation",
+            "certificate_hash": "ab9708f8cb31fa830056e69b5642d51d399f7566"
+          }
+        },
+        {
+          "client_id": "336268949436-jvdadpgr9apg3h4emf0cleijvfi7eh38.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxMgbsmjFAhvwfGtn0gfvnBBJtWLefNSo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "336268949436-jvdadpgr9apg3h4emf0cleijvfi7eh38.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
