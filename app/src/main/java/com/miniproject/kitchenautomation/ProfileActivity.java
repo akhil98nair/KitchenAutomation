@@ -63,7 +63,7 @@ public class ProfileActivity extends navigation_activity {
         FirebaseUser user = mAuth.getCurrentUser();
         demoRef = rootRef.child(user.getUid());
 
-        DatabaseReference table_user = FirebaseDatabase.getInstance().getReference(user.getUid());
+        DatabaseReference table_user = FirebaseDatabase.getInstance().getReference(user.getUid()+ "/Profile");
         table_user.keepSynced(true);
         if(user != null){
             Glide.with(this)
