@@ -31,6 +31,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.Map;
 
 public class ProfileActivity extends navigation_activity {
     ImageView user_image;
@@ -63,7 +64,7 @@ public class ProfileActivity extends navigation_activity {
         FirebaseUser user = mAuth.getCurrentUser();
         demoRef = rootRef.child(user.getUid());
 
-        DatabaseReference table_user = FirebaseDatabase.getInstance().getReference(user.getUid());
+        DatabaseReference table_user = FirebaseDatabase.getInstance().getReference(user.getUid()+"/Profile");
         table_user.keepSynced(true);
         if(user != null){
             Glide.with(this)
@@ -79,18 +80,17 @@ public class ProfileActivity extends navigation_activity {
         }
         table_user.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot ds : dataSnapshot.getChildren()){
-
-                    emergency_no1.setText(ds.child("emergency_no1").getValue(String.class));
-                    emergency_no2.setText(ds.child("emergency_no2").getValue(String.class));
-//                    Log.d("myTag", ds.child("name").getValue(String.class) );
-                    mobile.setText(ds.child("mobile").getValue(String.class));
-                    lpg_service_no.setText(ds.child("lpg_service_no").getValue(String.class));
-                    address.setText(ds.child("address").getValue(String.class));
-                    edittext.setText(ds.child("DOB").getValue(String.class));
-
-                }
+            public void onDataChange(@NonNull DataSnapshot ds) {
+                Map<String, Object> map = (Map<String, Object>) ds.getValue();
+                Log.d("tagee", "Value is: " + map);
+                String emergency_1 = ds.child("emergency_no1").getValue(String.class);
+                emergency_no1.setText(emergency_1);
+                emergency_no2.setText(ds.child("emergency_no2").getValue(String.class));
+                Log.d("myTag1", emergency_1+"hello" );
+                mobile.setText(ds.child("mobile").getValue(String.class));
+                lpg_service_no.setText(ds.child("lpg_service_no").getValue(String.class));
+                address.setText(ds.child("address").getValue(String.class));
+                edittext.setText(ds.child("DOB").getValue(String.class));
             }
 
             @Override
@@ -110,7 +110,7 @@ public class ProfileActivity extends navigation_activity {
 
             @Override
             public void onClick(View v) {
-                if (isNetworkAvailable() == false){
+                if (!isNetworkAvailable()){
                     Toast.makeText(ProfileActivity.this,"Connect to Internet",Toast.LENGTH_SHORT).show();
                 }
                 String emergency1 = emergency_no1.getText().toString();

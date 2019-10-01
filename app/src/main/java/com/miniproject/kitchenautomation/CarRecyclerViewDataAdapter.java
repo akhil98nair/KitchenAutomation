@@ -10,16 +10,16 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class CarRecyclerViewDataAdapter extends RecyclerView.Adapter<CarRecyclerViewItemHolder> {
+public class CarRecyclerViewDataAdapter extends RecyclerView.Adapter<GroceryRecyclerViewItemHolder> {
 
-    private List<CarRecyclerViewItem> carItemList;
+    private List<GroceryRecyclerViewItem> carItemList;
 
-    public CarRecyclerViewDataAdapter(List<CarRecyclerViewItem> carItemList) {
+    public CarRecyclerViewDataAdapter(List<GroceryRecyclerViewItem> carItemList) {
         this.carItemList = carItemList;
     }
 
     @Override
-    public CarRecyclerViewItemHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public GroceryRecyclerViewItemHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // Get LayoutInflater object.
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         // Inflate the RecyclerView item layout xml.
@@ -27,6 +27,7 @@ public class CarRecyclerViewDataAdapter extends RecyclerView.Adapter<CarRecycler
 
         // Get car title text view object.
         final TextView carTitleView = (TextView)carItemView.findViewById(R.id.card_view_image_title);
+        final TextView kg = (TextView)carItemView.findViewById(R.id.kg);
         // Get car image view object.
         final ImageView carImageView = (ImageView)carItemView.findViewById(R.id.card_view_image);
         // When click the image.
@@ -42,19 +43,20 @@ public class CarRecyclerViewDataAdapter extends RecyclerView.Adapter<CarRecycler
         });
 
         // Create and return our custom Car Recycler View Item Holder object.
-        CarRecyclerViewItemHolder ret = new CarRecyclerViewItemHolder(carItemView);
+        GroceryRecyclerViewItemHolder ret = new GroceryRecyclerViewItemHolder(carItemView);
         return ret;
     }
 
     @Override
-    public void onBindViewHolder(CarRecyclerViewItemHolder holder, int position) {
+    public void onBindViewHolder(GroceryRecyclerViewItemHolder holder, int position) {
         if(carItemList!=null) {
             // Get car item dto in list.
-            CarRecyclerViewItem carItem = carItemList.get(position);
+            GroceryRecyclerViewItem carItem = carItemList.get(position);
 
             if(carItem != null) {
                 // Set car item title.
                 holder.getCarTitleText().setText(carItem.getCarName());
+                holder.getGrocery_kg().setText(carItem.getKg() + " KG");
                 // Set car image resource id.
                 holder.getCarImageView().setImageResource(carItem.getCarImageId());
             }

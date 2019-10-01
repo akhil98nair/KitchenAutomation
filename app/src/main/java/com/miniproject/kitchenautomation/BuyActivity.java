@@ -17,14 +17,14 @@ public class BuyActivity extends navigation_activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ViewGroup content = (ViewGroup) findViewById(R.id.display);
-        getLayoutInflater().inflate(R.layout.activity_card_view, content, true);
+        getLayoutInflater().inflate(R.layout.buy_activity_card_view, content, true);
 
 
 
         initializeCarItemList();
 
         // Create the recyclerview.
-        RecyclerView carRecyclerView = (RecyclerView)findViewById(R.id.card_view_recycler_list);
+        RecyclerView carRecyclerView = (RecyclerView)findViewById(R.id.card_view_recycler_list2);
         // Create the grid layout manager with 2 columns.
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 1);
         // Set layout manager.

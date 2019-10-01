@@ -1,0 +1,42 @@
+<androidx.coordinatorlayout.widget.CoordinatorLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/card_view_recycler_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+
+        android:id="@+id/lpg_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="440 PPM"
+        android:textSize="20dp"
+        />
+
+    <TextView
+        android:id="@+id/lpg_service"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:text="Call LPG Service"
+        style="@style/profileStyledBackButton" />
+    <TextView
+        android:id="@+id/emergency_no"
+        android:layout_gravity="center"
+        android:layout_marginTop="200dp"
+        android:text="Call Emergency 1"
+        style="@style/profileStyledBackButton" />
+    <TextView
+        android:id="@+id/emergency_no1"
+        android:layout_gravity="center"
+        android:layout_marginTop="300dp"
+        android:text="Call Emergency 2"
+        style="@style/profileStyledBackButton" />
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
